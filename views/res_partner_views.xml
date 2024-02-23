@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="res_partner_form" model="ir.ui.view">
+        <field name="name">res.partner.form</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_partner_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//page[@name='internal_notes']" position="after">
+                <page string="Offers" name="offers_tab">
+                    <form>
+                        <sheet>
+                            <group>
+                                <field name="offer_discount" string="Offer Discount"/>
+                                <field name="special_discount" string="Special Discount (%"
+                                       attrs="{'invisible': [('offer_discount', '=', False)]}"/>
+                            </group>
+                        </sheet>
+                    </form>
+                </page>
+            </xpath>
+            <xpath expr="//button[@name='action_view_sale_order']" position='before'>
+                <button class="oe_stat_button" type="object" name="action_special_discount" attrs="{'invisible': [('offer_discount', '=', False)]}">
+                    <div class="o_field_widget o_stat_info">
+                        <t class="o_stat_text">
+                            <b>Special Discount</b>
+                        </t>
+                    </div>
+                </button>
+            </xpath>
+        </field>
+    </record>
+</odoo>

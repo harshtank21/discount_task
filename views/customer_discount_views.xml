@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record model="ir.ui.view" id="customer_discount_from_view">
+        <field name="name">customer.discount.from.view</field>
+        <field name="model">customer.discount</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="partner_id"/>
+                            <field name="amount"/>
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="customer_discount_tree_view">
+        <field name="name">customer.discount.tree.view</field>
+        <field name="model">customer.discount</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="partner_id"/>
+                <field name="amount"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="customer_discount_action" model="ir.actions.act_window">
+        <field name="name">Customer Discount</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">customer.discount</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem id="customer_discount_menu"
+              name="Customer Discount"
+              parent="sale.menu_sale_config"
+              action="customer_discount_action"
+    />
+</odoo>

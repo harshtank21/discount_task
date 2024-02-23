@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <template id="description_sale_order_document_inherit" inherit_id="sale.report_saleorder_document">
+        <xpath expr="//th[@name='th_taxes']"
+               position="before">
+            <th name="th_discount_amount" class="text-start">Discount Amount</th>
+            <!--            <t t-set="current_discount_amount" t-value="current_discount_amount + line.discount_amount" />-->
+        </xpath>
+        <xpath expr="//td[@name='td_taxes']" position="before">
+            <td class="text-center">
+                <span t-field="line.discount_amount"/>
+            </td>
+        </xpath>
+        <!--        <xpath expr="//div[@name='so_total_summary']" position="before">-->
+        <!--            <div class="clearfix" name="_total_summary">-->
+        <!--                <div t-attf-class="#{'col-6' if report_type != 'html' else 'col-sm-7 col-md-6'} ms-auto">-->
+        <!--                    <b><t>Discount Amount</t></b>-->
+        <!--                    <td class="text-center">-->
+        <!--                        <table class="table table-sm table-borderless">-->
+        <!--                            <span t-field="doc.discount_amount_total" class="text-end"/>-->
+        <!--                        </table>-->
+        <!--                    </td>-->
+        <!--                </div>-->
+        <!--            </div>-->
+        <!--        </xpath>-->
+        <xpath expr="//t[@t-set='display_discount']" position="after">
+            <t t-set="display_discount_amount" t-value="sum(l.discount_amount for l in lines_to_report)"/>
+        </xpath>
+        <xpath expr="//div[@name='so_total_summary']" position="after">
+            <div class="clearfix" name="total_mary">
+                <div id="total_d" class="row" name="total D">
+                    <div t-attf-class="#{'col-6' if report_type != 'html' else 'col-sm-7 col-md-6'} ms-auto">
+                        <table class="table table-sm table-borderless">
+                            <tr class="border-black o_discount_amount">
+                                <td>
+                                    <strong>Discount Amount</strong>
+                                </td>
+                                <td class="text-end">
+                                    <span t-esc="display_discount_amount"/>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+        </xpath>
+
+    </template>
+</odoo>
